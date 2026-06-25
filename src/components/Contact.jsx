@@ -22,7 +22,7 @@ function Contact() {
     Phone: ${formData.phone}
     Legal Issue: ${formData.issue}`;
 
-    const whatsappUrl = `https://wa.me/917064662492?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/919776881141?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, "_blank");
   };
