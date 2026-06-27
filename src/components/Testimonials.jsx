@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay} from "swiper/modules";
 import "swiper/css";
+import { API_URL } from "../config";
 
 function Testimonials() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch(`${API_URL}/reviews`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

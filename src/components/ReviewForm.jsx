@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 
 function ReviewForm() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ function ReviewForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/reviews", {
+      const response = await fetch(`${API_URL}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

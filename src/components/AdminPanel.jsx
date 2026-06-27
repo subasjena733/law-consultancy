@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 function AdminPanel() {
 
@@ -14,7 +15,7 @@ function AdminPanel() {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://localhost:5000/admin/stats",
+      `${API_URL}/admin/stats`,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -35,7 +36,7 @@ function AdminPanel() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/admin/reviews",
+        `${API_URL}/admin/reviews`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -59,7 +60,7 @@ function AdminPanel() {
     try {
       const token = localStorage.getItem("token");
 
-      await fetch(`http://localhost:5000/reviews/${id}/approve`, {
+      await fetch(`${API_URL}/reviews/${id}/approve`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`
@@ -76,7 +77,7 @@ function AdminPanel() {
     try {
       const token = localStorage.getItem("token");
 
-      await fetch(`http://localhost:5000/reviews/${id}`, {
+      await fetch(`${API_URL}/reviews/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ function AdminLogin() {
   const handleLogin = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/admin/login",
+      `${API_URL}/admin/login`,
       {
         method: "POST",
         headers: {
