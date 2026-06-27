@@ -1,26 +1,28 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import TrustBar from "./components/TrustBar";
-import Services from "./components/Services";
-import About from "./components/About";
-import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import WhatsAppButton from "./components/WhatsAppButton";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./Home";
+import AdminPanel from "./components/AdminPanel";
+import AdminLogin from "./components/AdminLogin";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <TrustBar />
-      <Services />
-      <About />
-      <Testimonials />
-      <Contact />
-      <WhatsAppButton />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/admin/login" element={
+        <PublicRoute>
+          <AdminLogin />
+      </PublicRoute>
+        } />
+      <Route
+        path="/admin"
+        element={
+                  <ProtectedRoute>
+                    <AdminPanel />
+                  </ProtectedRoute>
+                }
+      />
+    </Routes>
   );
 }
 
