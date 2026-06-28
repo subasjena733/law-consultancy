@@ -9,6 +9,7 @@ function ReviewForm() {
   });
 
   const [responseMessage, setResponseMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,6 +20,7 @@ function ReviewForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(`${API_URL}/reviews`, {
@@ -33,6 +35,11 @@ function ReviewForm() {
 
       if (data.success) {
         setResponseMessage("Review submitted successfully!");
+
+        setTimeout(() => {
+          setResponseMessage("");
+        }, 2000);
+
         setFormData({
           name: "",
           rating: "",
@@ -40,10 +47,21 @@ function ReviewForm() {
         });
       } else {
         setResponseMessage("Submission failed.");
+        setTimeout(() => {
+          setResponseMessage("");
+        }, 2000);
+
       }
     } catch (error) {
       console.error(error);
       setResponseMessage("Server error.");
+
+      setTimeout(() => {
+        setResponseMessage("");
+      }, 2000);
+
+    }finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -97,16 +115,21 @@ function ReviewForm() {
 
           <button
             type="submit"
-            className="bg-yellow-500 px-6 py-3 rounded-xl font-bold"
+            disabled={isSubmitting}
+            className="bg-yellow-500 px-6 py-3 rounded-xl font-bold transition duration-150 active:scale-95 hover:brightness-110 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Submit Review
+           {isSubmitting ? "Submitting..." : "Submit Review"}
           </button>
         </form>
 
         {responseMessage && (
-          <p className="text-center text-green-400 mt-6">
+          <div className="
+            fixed top-5 right-5
+            bg-green-500 text-white
+            px-6 py-3 rounded-lg shadow-lg z-50
+          ">
             {responseMessage}
-          </p>
+          </div>
         )}
       </div>
     </section>

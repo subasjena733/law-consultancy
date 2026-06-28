@@ -5,36 +5,41 @@ import { API_URL } from "../config";
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const handleLogin = async () => {
-  try {
-    const response = await fetch(
-      `${API_URL}/admin/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      }
-    );
+    setIsLoading(true);
 
-    const data = await response.json();
+    try {
+      const response = await fetch(
+        `${API_URL}/admin/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username,
+            password
+          })
+        }
+      );
 
-    if (data.success) {
-      localStorage.setItem("token", data.token);
-      navigate("/admin");
-    } else {
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        navigate("/admin");
+      } else {
       alert(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }finally {
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center">
@@ -61,9 +66,10 @@ function AdminLogin() {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-yellow-500 py-3 rounded font-bold"
+          disabled={isLoading}
+          className="w-full bg-yellow-500 py-3 rounded font-bold transition duration-150 active:scale-95 hover:brightness-110 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Login
+          {isLoading ? "⏳ Logging in..." : "Login"}
         </button>
       </div>
     </div>

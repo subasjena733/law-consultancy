@@ -13,7 +13,7 @@ function Hero() {
     </p>
 
     <div className="mt-8 flex gap-4 flex-wrap">
-      <button className="bg-yellow-500 text-black px-6 py-4 rounded-xl font-bold">
+      <button className="bg-yellow-500 text-black px-6 py-4 rounded-xl font-bold transition duration-150 active:scale-95 hover:brightness-110 shadow-md hover:shadow-lg">
         Book Consultation
       </button>
 

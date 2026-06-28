@@ -6,7 +6,7 @@ function Navbar() {
          <h1 className="text-xl font-bold">Justice A.K. Sharma</h1>
          <p className="text-xs text-gray-300">Retired Judge</p>
         </div>
-        <button className="bg-yellow-500 text-black px-5 py-2 rounded-lg font-semibold hover:scale-105 transition">
+        <button className="bg-yellow-500 text-black px-5 py-2 rounded-lg font-semibold hover:scale-105 transition duration-150 active:scale-95 hover:brightness-110 shadow-md hover:shadow-lg">
           Book Consultation
         </button>
       </div>

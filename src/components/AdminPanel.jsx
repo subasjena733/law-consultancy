@@ -10,28 +10,33 @@ function AdminPanel() {
     rejected: 0,
     avgRating: 0
   });
+
   const fetchStats = async () => {
-  try {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      `${API_URL}/admin/stats`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await fetch(
+        `${API_URL}/admin/stats`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
-      }
-    );
+      );
 
-    const data = await response.json();
-    setStats(data);
-  } catch (error) {
-    console.error(error);
-  }
-};
+      const data = await response.json();
+      setStats(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchPendingReviews = async () => {
+    setLoading(true);
+
     try {
       const token = localStorage.getItem("token");
 
@@ -48,6 +53,8 @@ function AdminPanel() {
       setReviews(data.reviews);
     } catch (error) {
       console.error(error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -56,7 +63,11 @@ function AdminPanel() {
     fetchStats();
   }, []);
 
+  const [processingId, setProcessingId] = useState(null);
+
   const approveReview = async (id) => {
+    setProcessingId(id);
+
     try {
       const token = localStorage.getItem("token");
 
@@ -71,9 +82,13 @@ function AdminPanel() {
       fetchStats();
     } catch (error) {
       console.error(error);
+    }finally {
+      setProcessingId(null);
     }
   };
   const rejectReview = async (id) => {
+    setProcessingId(id);
+
     try {
       const token = localStorage.getItem("token");
 
@@ -88,6 +103,8 @@ function AdminPanel() {
       fetchStats();
     } catch (error) {
       console.error(error);
+    }finally {
+      setProcessingId(null);
     }
   };
 
@@ -98,7 +115,14 @@ function AdminPanel() {
     navigate("/admin/login");
   };
 
-
+  if (loading) {
+    return (
+      <p className="text-white text-center">
+        Loading reviews...
+      </p>
+    );
+  }
+  
   return (
     <section className="py-20 px-6 bg-slate-900">
       <div className="max-w-4xl mx-auto">
@@ -137,7 +161,7 @@ function AdminPanel() {
           </div>
           <button
             onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold m-2"
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold m-2 transition duration-150 active:scale-95 shadow-md hover:shadow-lg"
           >
             Logout
           </button>
@@ -166,16 +190,18 @@ function AdminPanel() {
               <div className="mt-4 flex gap-4">
                 <button
                   onClick={() => approveReview(review._id)}
-                  className="bg-green-500 px-4 py-2 rounded"
+                  disabled={processingId === review._id}
+                  className="bg-green-500 px-4 py-2 rounded transition duration-150 active:scale-95 hover:bg-green-600 shadow-md hover:shadow-lg"
                 >
-                  Approve
+                  {processingId === review._id ? "Approving..." : "Approve"}
                 </button>
 
                 <button
                   onClick={() => rejectReview(review._id)}
-                  className="bg-red-500 px-4 py-2 rounded"
+                  disabled={processingId === review._id}
+                  className="bg-red-500 px-4 py-2 rounded transition duration-150 active:scale-95 hover:bg-red-600 shadow-md hover:shadow-lg"
                 >
-                 Reject
+                 {processingId === review._id ? "Processing..." : "Reject"}
                 </button>
               </div>
 
