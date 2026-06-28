@@ -17,7 +17,7 @@ function About() {
           <p className="mt-6 text-gray-600 text-lg leading-relaxed">
             Advocate Bandana Kar is an Ex-District judge with 27 years of
             combined experience as a lawyer and judge. Based in
-            Bhubaneswar, Odisha, he provides trusted legal consultation
+            Bhubaneswar, Odisha, she provides trusted legal consultation
             in civil, criminal and family law matters.
           </p>
 
