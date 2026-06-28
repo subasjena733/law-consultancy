@@ -125,12 +125,21 @@ function AdminPanel() {
   
   return (
     <section className="py-20 px-6 bg-slate-900">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            Admin Panel
-          </h2>
-          <div className="grid md:grid-cols-4 gap-4 mb-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col gap-6 mb-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-3xl font-bold text-white mb-8">
+              Admin Panel
+            </h2>
+
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold m-2 transition duration-150 active:scale-95 shadow-md hover:shadow-lg"
+            >
+              Logout
+            </button>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-slate-800 p-5 rounded-xl text-center">
               <p className="text-gray-400">Pending</p>
               <h2 className="text-3xl text-yellow-400 font-bold">
@@ -159,12 +168,6 @@ function AdminPanel() {
               </h2>
             </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold m-2 transition duration-150 active:scale-95 shadow-md hover:shadow-lg"
-          >
-            Logout
-          </button>
         </div>
 
         {reviews.length === 0 ? (
@@ -173,7 +176,7 @@ function AdminPanel() {
           reviews.map((review) => (
             <div
               key={review._id}
-              className="bg-slate-800 p-6 rounded-xl mb-6"
+              className="bg-slate-800 p-6 rounded-xl mb-6 "
             >
               <h3 className="text-yellow-400 font-bold">
                 {review.name}
