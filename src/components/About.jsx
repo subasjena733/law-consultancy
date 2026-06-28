@@ -4,8 +4,8 @@ function About() {
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         
         <img
-          src="/judge.jpg"
-          alt="Justice A.K. Sharma"
+          src="/judge1.jpeg"
+          alt="Advocate Bandana Kar"
           className="w-full h-[450px] object-cover rounded-2xl shadow-xl"
         />
 
@@ -15,7 +15,7 @@ function About() {
           </h2>
 
           <p className="mt-6 text-gray-600 text-lg leading-relaxed">
-            Justice A.K. Sharma is a retired judge with 27 years of
+            Advocate Bandana Kar is an Ex-District judge with 27 years of
             combined experience as a lawyer and judge. Based in
             Bhubaneswar, Odisha, he provides trusted legal consultation
             in civil, criminal and family law matters.

@@ -3,11 +3,11 @@ function Hero() {
     <section className="bg-slate-900 text-white min-h-screen flex items-center">
   <div className="max-w-6xl mx-auto px-6">
     <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-      Expert Legal Guidance from a Retired Judge
+      Expert Legal Guidance from an Ex-District Judge
     </h1>
 
     <p className="mt-6 text-xl text-gray-300 max-w-3xl">
-      Justice A.K. Sharma offers trusted consultation in Civil,
+      Advocate Bandana Kar offers trusted consultation in Civil,
       Criminal and Family Law with 27 years of combined judicial
       and legal experience.
     </p>
